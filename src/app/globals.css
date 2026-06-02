@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0f0d1f;
+  --foreground: #ece9ff;
+}
+
+body {
+  color: var(--foreground);
+  background: radial-gradient(1100px 520px at 50% -12%, #2a2546 0%, transparent 62%),
+    var(--background);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Khung chứa lá số react-iztro (component có nền sáng riêng) */
+.iztro-frame {
+  display: inline-block;
+  border-radius: 1rem;
+  overflow: auto;
+  background: #fff;
+  box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+}
