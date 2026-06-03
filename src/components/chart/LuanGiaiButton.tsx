@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Sparkle } from "@phosphor-icons/react";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { Button } from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
@@ -20,12 +21,13 @@ export default function LuanGiaiButton() {
         variant="secondary"
         onClick={() => requireAuth(() => setOpen(true))}
       >
-        ✨ Luận giải lá số
+        <Sparkle size={16} weight="duotone" />
+        Luận giải lá số
       </Button>
       <Modal open={open} onClose={() => setOpen(false)} title="Luận giải lá số">
-        <p className="text-sm text-white/70">
+        <p className="text-sm text-fg-muted">
           Tính năng luận giải tự động đang được phát triển. Cảm ơn bạn đã đăng
-          nhập — hãy quay lại sau nhé!
+          nhập, hãy quay lại sau nhé!
         </p>
         <div className="mt-4 flex justify-end">
           <Button onClick={() => setOpen(false)}>Đã hiểu</Button>

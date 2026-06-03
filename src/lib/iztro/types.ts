@@ -19,6 +19,10 @@ export interface ChartInput {
   birthTimeIndex: number;
   /** Chỉ dùng khi calendarType = "lunar". */
   isLeapMonth?: boolean;
+  /** Người dùng không rõ giờ sinh — khi đó dùng canh giờ mặc định. */
+  hourUnknown?: boolean;
+  /** Nơi sinh (tham khảo, không ảnh hưởng cách an sao của iztro). */
+  birthPlace?: string;
   language?: Language;
 }
 

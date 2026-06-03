@@ -2,24 +2,233 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #0f0d1f;
-  --foreground: #ece9ff;
+/* ============================================================
+   THEME TOKENS — đêm sao (mặc định) / giấy cổ (light)
+   ============================================================ */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg: #0d0b11;
+  --color-surface: #16131d;
+  --color-surface-2: #1f1b29;
+  --color-line: rgba(214, 191, 138, 0.14);
+  --color-line-strong: rgba(214, 191, 138, 0.3);
+
+  --color-fg: #ece6d8;
+  --color-fg-muted: #a69d8a;
+  --color-fg-faint: #6e6554;
+
+  --color-brass: #c9a44f;
+  --color-brass-soft: #e6cd84;
+  --color-brass-deep: #9a7a36;
+  --color-jade: #5aa890;
+  --color-cinnabar: #c8503b;
+
+  /* CTA vàng — giữ ánh vàng + chữ mực đậm để tương phản tốt ở cả 2 theme */
+  --color-cta: #c9a44f;
+  --color-cta-soft: #e6cd84;
+  --color-cta-ink: #171309;
+
+  --color-paper: #ece0c4;
+  --color-paper-ink: #2a2316;
+  --color-paper-line: rgba(60, 45, 20, 0.2);
+
+  --shadow-sink: inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-float: 0 28px 80px -34px rgba(0, 0, 0, 0.85);
+
+  --star-color: rgba(236, 230, 216, 0.55);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg: #ece1c8;
+  --color-surface: #f4ead4;
+  --color-surface-2: #e4d6b6;
+  --color-line: rgba(58, 44, 20, 0.16);
+  --color-line-strong: rgba(58, 44, 20, 0.32);
+
+  --color-fg: #2a2317;
+  --color-fg-muted: #6a5d44;
+  --color-fg-faint: #9c8d70;
+
+  --color-brass: #8f6c22;
+  --color-brass-soft: #ab8534;
+  --color-brass-deep: #6f5316;
+  --color-jade: #2f6f5b;
+  --color-cinnabar: #a23a29;
+
+  --color-cta: #b3892f;
+  --color-cta-soft: #caa047;
+  --color-cta-ink: #1c1407;
+
+  --color-paper: #f5ecd8;
+  --color-paper-ink: #2a2317;
+  --color-paper-line: rgba(58, 44, 20, 0.16);
+
+  --shadow-sink: inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 1px 2px rgba(60, 45, 20, 0.12);
+  --shadow-float: 0 24px 60px -30px rgba(60, 45, 20, 0.4);
+
+  --star-color: rgba(60, 45, 20, 0.16);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* {
+  border-color: var(--color-line);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  color: var(--foreground);
-  background: radial-gradient(1100px 520px at 50% -12%, #2a2546 0%, transparent 62%),
-    var(--background);
-  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  min-height: 100dvh;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Khung chứa lá số react-iztro (component có nền sáng riêng) */
-.iztro-frame {
-  display: inline-block;
-  border-radius: 1rem;
-  overflow: auto;
-  background: #fff;
-  box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+/* nền đêm sao: quầng sáng đồng trên đỉnh + lớp sao thưa */
+.sky {
+  position: relative;
+  isolation: isolate;
+}
+.sky::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(
+      1100px 640px at 50% -10%,
+      color-mix(in oklab, var(--color-brass) 12%, transparent),
+      transparent 58%
+    ),
+    radial-gradient(
+      820px 560px at 86% 4%,
+      color-mix(in oklab, var(--color-jade) 8%, transparent),
+      transparent 55%
+    );
+  pointer-events: none;
+}
+.sky::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    radial-gradient(1.2px 1.2px at 12% 22%, var(--star-color), transparent),
+    radial-gradient(1px 1px at 28% 64%, var(--star-color), transparent),
+    radial-gradient(1.4px 1.4px at 47% 16%, var(--star-color), transparent),
+    radial-gradient(1px 1px at 63% 48%, var(--star-color), transparent),
+    radial-gradient(1.2px 1.2px at 78% 28%, var(--star-color), transparent),
+    radial-gradient(1px 1px at 89% 70%, var(--star-color), transparent),
+    radial-gradient(1px 1px at 38% 84%, var(--star-color), transparent),
+    radial-gradient(1.3px 1.3px at 7% 78%, var(--star-color), transparent);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* grain giấy — lớp phủ cố định, không chặn tương tác */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-brass) 40%, transparent);
+  color: var(--color-fg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   KHUNG LÁ SỐ — giấy dó đóng khung đồng (đọc như cổ vật)
+   react-iztro tự mang style riêng; ta đặt nó trên nền giấy.
+   ============================================================ */
+.astro-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+  padding: 12px;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--color-paper) 92%, white),
+      var(--color-paper)
+    );
+  border: 1px solid var(--color-brass-deep);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--color-brass) 30%, transparent),
+    var(--shadow-float);
+  /* Cuộn ngang chỉ khi màn hình quá hẹp so với bề rộng tối thiểu của lá số */
+  overflow-x: auto;
+}
+/* react-iztro: chart luôn chiếm trọn bề rộng khung, đủ chỗ hiển thị 12 cung */
+.astro-frame :where(.iztro-astrolabe) {
+  background: transparent !important;
+  width: 100%;
+  min-width: 680px;
+}
+
+/* Thanh cuộn mảnh, tông đồng */
+.astro-frame::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+.astro-frame::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--color-brass-deep) 60%, transparent);
+  border-radius: 999px;
+}
+
+/* ============================================================
+   TIỆN ÍCH
+   ============================================================ */
+.rule-gold {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-line-strong),
+    transparent
+  );
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--color-brass);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .animate-rotate-slow,
+  .animate-rotate-rev,
+  .animate-spin-load,
+  .animate-twinkle {
+    animation: none !important;
+  }
 }

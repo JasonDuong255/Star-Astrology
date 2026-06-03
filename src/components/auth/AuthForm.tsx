@@ -71,12 +71,14 @@ export default function AuthForm({
 
   return (
     <div className="space-y-4">
-      <div className="flex rounded-xl bg-white/5 p-1 text-sm">
+      <div className="flex rounded-xl border border-line bg-surface p-1 text-sm">
         <button
           type="button"
           onClick={() => setMode("login")}
           className={`flex-1 rounded-lg py-2 transition ${
-            mode === "login" ? "bg-white/15 text-white" : "text-white/60"
+            mode === "login"
+              ? "bg-surface-2 font-medium text-fg shadow-sink"
+              : "text-fg-muted hover:text-fg"
           }`}
         >
           Đăng nhập
@@ -85,7 +87,9 @@ export default function AuthForm({
           type="button"
           onClick={() => setMode("register")}
           className={`flex-1 rounded-lg py-2 transition ${
-            mode === "register" ? "bg-white/15 text-white" : "text-white/60"
+            mode === "register"
+              ? "bg-surface-2 font-medium text-fg shadow-sink"
+              : "text-fg-muted hover:text-fg"
           }`}
         >
           Đăng ký
@@ -122,8 +126,8 @@ export default function AuthForm({
           />
         </Field>
 
-        {error && <p className="text-sm text-red-400">{error}</p>}
-        {info && <p className="text-sm text-emerald-400">{info}</p>}
+        {error && <p className="text-sm text-cinnabar">{error}</p>}
+        {info && <p className="text-sm text-jade">{info}</p>}
 
         <Button type="submit" className="w-full" disabled={busy}>
           {busy

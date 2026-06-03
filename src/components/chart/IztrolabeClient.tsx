@@ -10,7 +10,7 @@ const Iztrolabe = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex h-[480px] w-[480px] items-center justify-center text-ink/60">
+      <div className="flex h-[480px] w-[480px] items-center justify-center text-fg-muted">
         Đang vẽ lá số…
       </div>
     ),
@@ -19,7 +19,7 @@ const Iztrolabe = dynamic(
 
 export default function IztrolabeClient({ input }: { input: ChartInput }) {
   return (
-    <div className="iztro-frame">
+    <div className="astro-frame">
       <Iztrolabe
         birthday={input.birthDate}
         birthTime={input.birthTimeIndex}

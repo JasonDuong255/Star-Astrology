@@ -18,6 +18,8 @@ export const chartInputSchema = z.object({
     .regex(/^\d{4}-\d{2}-\d{2}$/, "Ngày sinh không hợp lệ (YYYY-MM-DD)"),
   birthTimeIndex: z.coerce.number().int().min(0).max(12),
   isLeapMonth: z.boolean().optional().default(false),
+  hourUnknown: z.boolean().optional().default(false),
+  birthPlace: z.string().trim().max(120).optional().or(z.literal("")),
   language: z.enum(LANGUAGES).default("vi-VN"),
 });
 

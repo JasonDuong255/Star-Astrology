@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { FloppyDisk } from "@phosphor-icons/react";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { Button } from "@/components/ui/Button";
 import type { ChartInput } from "@/lib/iztro/types";
@@ -56,9 +57,10 @@ export default function SaveChartButton({ input }: { input: ChartInput }) {
   return (
     <div className="flex items-center gap-2">
       <Button onClick={() => requireAuth(save)} disabled={busy}>
-        {busy ? "Đang lưu…" : "💾 Lưu lá số"}
+        <FloppyDisk size={16} weight="bold" />
+        {busy ? "Đang lưu…" : "Lưu lá số"}
       </Button>
-      {error && <span className="text-sm text-red-400">{error}</span>}
+      {error && <span className="text-sm text-cinnabar">{error}</span>}
     </div>
   );
 }

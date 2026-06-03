@@ -13,20 +13,21 @@ export default function RegisterPage() {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-md px-4 py-16">
-        <h1 className="text-center font-serif text-2xl font-bold">
+      <main className="mx-auto flex min-h-[70dvh] max-w-md flex-col justify-center px-5 py-16">
+        <p className="eyebrow text-center">Tài khoản</p>
+        <h1 className="mt-3 text-center font-serif text-3xl font-semibold text-fg">
           Tạo tài khoản
         </h1>
-        <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6">
+        <div className="mt-7 rounded-2xl border border-line bg-surface/60 p-6">
           <AuthForm
             supabase={supabase}
             defaultMode="register"
             onSuccess={() => router.push("/dashboard")}
           />
         </div>
-        <p className="mt-4 text-center text-sm text-white/60">
+        <p className="mt-5 text-center text-sm text-fg-muted">
           Đã có tài khoản?{" "}
-          <Link href="/login" className="text-gold hover:underline">
+          <Link href="/login" className="text-brass hover:underline">
             Đăng nhập
           </Link>
         </p>

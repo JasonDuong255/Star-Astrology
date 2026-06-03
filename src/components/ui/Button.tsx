@@ -1,22 +1,23 @@
 import { ButtonHTMLAttributes, forwardRef } from "react";
 
 type Variant = "primary" | "secondary" | "ghost";
-type Size = "md" | "lg";
+type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-xl font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200 ease-expo focus:outline-none focus-visible:ring-2 focus-visible:ring-brass/60 disabled:opacity-50 disabled:pointer-events-none active:translate-y-px";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-gold text-ink hover:bg-gold-soft shadow-lg shadow-gold/20",
+    "bg-cta text-cta-ink hover:bg-cta-soft shadow-[0_12px_30px_-14px_var(--color-cta)]",
   secondary:
-    "bg-white/10 text-white hover:bg-white/15 border border-white/15 backdrop-blur",
-  ghost: "text-white/80 hover:text-white hover:bg-white/10",
+    "border border-line-strong bg-surface text-fg hover:border-brass/50 hover:bg-surface-2",
+  ghost: "text-fg-muted hover:text-fg hover:bg-surface",
 };
 
 const sizes: Record<Size, string> = {
-  md: "h-10 px-4 text-sm",
-  lg: "h-12 px-6 text-base",
+  sm: "h-9 px-3 text-sm",
+  md: "h-11 px-5 text-sm",
+  lg: "h-12 px-7 text-base",
 };
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

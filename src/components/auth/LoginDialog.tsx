@@ -17,7 +17,7 @@ export default function LoginDialog({
 }) {
   return (
     <Modal open={open} onClose={onClose} title="Đăng nhập để tiếp tục">
-      <p className="-mt-2 mb-4 text-sm text-white/60">
+      <p className="-mt-2 mb-4 text-sm text-fg-muted">
         Lập và xem lá số là miễn phí. Đăng nhập để lưu lá số và mở khoá luận
         giải.
       </p>
